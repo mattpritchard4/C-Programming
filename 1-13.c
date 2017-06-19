@@ -1,4 +1,5 @@
-/* Write a program that prints its input one word per line. */
+/* Write a program to print a histogram of the lengths of words in
+ * it's input. INCOMPLETE */
 
 #include <stdio.h>
 

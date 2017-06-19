@@ -1,4 +1,5 @@
-/* Write a program to print the value of EOF. */
+/* Write a program to copy its input to its output, replacing each
+ * string of one or more blanks by a single blank. */
 
 #include <stdio.h>
 

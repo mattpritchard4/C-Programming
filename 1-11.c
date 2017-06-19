@@ -1,4 +1,4 @@
-/* Write a program to print the value of EOF. */
+/* Testing wordcount program. Ignore. */
 
 
 
