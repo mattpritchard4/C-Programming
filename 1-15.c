@@ -1,4 +1,5 @@
-/* Write a program that prints its input one word per line. */
+/* Rewrite the temperature conversion program of Section 1.2 to use a
+ * function for conversion. */
 
 #include <stdio.h>
 
