@@ -23,8 +23,6 @@ int main() {
         for (i = len; i > 0; --i) {
             if (line[i] == '\n' || line[i] == '\t' || line[i] == '\0') {
                 /*makes sure trailing \0 \t \n characters are not counted*/
-                /*makes sure if last character already detected, it
-                  doesn't get wiped out as the loop decrements */
                 last = last; 
             }
             else {
@@ -43,6 +41,7 @@ int main() {
             printf("%c", longest[i]);
         }
     }
+    printf("\n");
     return 0;
 }
 
