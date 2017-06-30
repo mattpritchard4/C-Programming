@@ -1,2 +1,2 @@
-output: 1-19.c
-	cc 1-19.c -Wall -Werror -o 1-19.out
+output: 1-20.c
+	cc 1-20.c -Wall -Werror -o 1-20.out
