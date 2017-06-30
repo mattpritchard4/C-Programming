@@ -9,15 +9,14 @@ void reverse(int size, char to[], char from[]);
 
 int main() {
     int len; /* current line length */
-
+    
     char line[MAXLINE]; /* current input line */
     char backward[MAXLINE]; /* longest line saved here */
 
     while ((len = get_line(line, MAXLINE)) > 0) {
-        reverse(line);
-        printf("%s", line);
+        reverse(len, backward, line);
+        printf("%s\n", backward);
     }
-    printf("\n");
     return 0;
 }
 
@@ -52,15 +51,11 @@ void copy(char to[], char from []) {
 void reverse(int size, char to[], char from[]) {
     int i;
     int length;
-    int newline;
-    int index;
-    
-    newline = (size - 1);
-    length = index = (size - 2);
-    from[size] = '\0';
-    from[newline] = '\n';
-    for (i = 0; i < length; ++i) {
-        to[i] = from[index];
-        --index;
+
+    length = 0;
+    size = size - 1;
+    for (i = size; i >= 0; --i) {
+        to[i] = from[length];
+        ++length;
     }
 }
