@@ -1,2 +1,14 @@
-output: 1-19.c
-	cc 1-19.c -Wall -Werror -o 1-19.out
+CFLAGS=-Wall -Werror -g -Wextra -Wunused
+LDFLAGS=-g
+
+ALL=ex-2-05
+
+all: ex-2-05
+
+ex-2-05.o: ex-2-05.c
+
+ex-2-05: ex-2-05.o
+
+clean:
+	rm -rf $(TARGETS) *.o
+
