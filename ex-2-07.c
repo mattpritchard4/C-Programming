@@ -24,7 +24,7 @@
 #define LOW_BITS (x & ((power(2,LOW_POW)) - 1))
 #define HIGH_BITS (x & ((power(2,HIGH_POW) - 1)) << (p + 1))
 
-unsigned set_bits(unsigned x, int p, int n);
+unsigned invert(unsigned x, int p, int n);
 unsigned getbits(unsigned x, int p, int n);
 int power(int initial, int power);
 int ith_bit(int n, int i);
@@ -45,20 +45,9 @@ unsigned getbits(unsigned x, int p, int n)
     return (x >> (p + 1 - n)) & ~(~0 << n);
 }
 
-unsigned set_bits(unsigned x, int p, int n)
+unsigned invert(unsigned x, int p, int n)
 {
-    unsigned to_invert, shifted, ones;
-
-    ones =  (~0 & (power(2,n) - 1)) << (p - (n -1));
-    to_invert = getbits(x, p, n);
-    shifted = (to_invert << (p - (n - 1)));
-
-    x = x ^ shifted;
-    x = x | ones;
-    x = x ^ shifted;
-
-    print_binary(x);
-    return x;
+    return x ^ (((1 << n) - 1) << p);
 }
 
 int ith_bit(int n, int i)
@@ -93,7 +82,7 @@ int main()
 
     input = 97652;
     print_binary(input);
-    set_bits(input, 7, 6);
+    print_binary(invert(input, 9, 4));
     return 0;
 }
 
