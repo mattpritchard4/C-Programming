@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #define BITS_PER_INT (8 * sizeof(int))
-#define LOW_POW (p - n)
+#define LOW_POW (p - (n - 1))
 #define HIGH_POW ((BITS_PER_INT - 1) - p)
 #define LOW_BITS (x & ((power(2,LOW_POW)) - 1))
 #define HIGH_BITS (x & ((power(2,HIGH_POW) - 1)) << (p + 1))
@@ -30,7 +30,7 @@ unsigned getbits(unsigned x, int p, int n)
 unsigned set_bits(unsigned x, int p, int n, unsigned y)
 {
     y = getbits(y, (n - 1), n);
-    x = (LOW_BITS | HIGH_BITS) | (y << (p - (n + 1)));
+    x = (LOW_BITS | HIGH_BITS) | (y << (p - (n - 1)));
     return x;
 }
 
