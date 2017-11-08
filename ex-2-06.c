@@ -60,11 +60,19 @@ void print_binary(unsigned n)
     putchar('\n');
 }
 
-
 int main()
 {
     int answer;
 
+    printf("x is:\n");
+    print_binary(58827);
+    printf("y is:\n");
+    print_binary(581);
+    printf("n is 4:\n");
+    printf("p is 0:\n");
+    printf("The bottom n bits (excluding leading zeroes) of y are:\n");
+    print_binary(getbits(581, (4 - 1), 4));
+    printf("The answer is:\n");
     answer = set_bits(58827, 9, 4, 581);
     print_binary(answer);
     return 0;
