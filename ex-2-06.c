@@ -1,48 +1,45 @@
 #include <stdio.h>
+
 #define BITS_PER_INT (8 * sizeof(int))
+#define LOW_POW (p - n)
+#define HIGH_POW ((BITS_PER_INT - 1) - p)
+#define LOW_BITS (x & ((power(2,LOW_POW)) - 1))
+#define HIGH_BITS (x & ((power(2,HIGH_POW) - 1)) << (p + 1))
 
-int extract_tag(int i);
-int extract_ptr(int i);
-int set_tag(int i, int tag);
+unsigned set_bits(unsigned x, int p, int n, unsigned y);
+unsigned getbits(unsigned x, int p, int n);
+int power(int initial, int power);
 int ith_bit(int n, int i);
-void print_binary(int n);
+void print_binary(unsigned n);
 
-/* return the two bottom "tag" bits */
-int extract_tag(int i)
+int power(int base, int n)
 {
-    return i & 3;
+    int i, p;
+
+    p = 1;
+    for (i = 1; i <= n; ++i)
+        p = p * base;
+    return p;
 }
 
- /* returns the top 30 bits, with the bottom two set
-    to zero */
-
-int extract_ptr(int i)
+unsigned getbits(unsigned x, int p, int n)
 {
-    return i & ~3;
+    return (x >> (p + 1 - n)) & ~(~0 << n);
 }
 
-/* return i with the bottom two bits set to the "tag".
-   It is assumed that "tag" must be between 0 and 3 */
-
-int set_tag(int i, int tag)
+unsigned set_bits(unsigned x, int p, int n, unsigned y)
 {
-    return (i & ~3) | tag;
+    y = getbits(y, (n - 1), n);
+    x = (LOW_BITS | HIGH_BITS) | (y << (p - (n + 1)));
+    return x;
 }
-
-/* returns 0 if the ith bit is 0, 1 if it is 1. Bits
-   are numbered 0 to (BITS_PER_INT - 1) */
 
 int ith_bit(int n, int i)
 {
     return (n >> i) & 1;
 }
 
-/* prints "n" out in binary to stdout, preceded by "0b"
-   and with no leading 0s. It will be easiest to write a
-   version that prints the leading zeros before fixing
-   that "bug". */
-
-void print_binary(int n)
+void print_binary(unsigned n)
 {
     int i;
     int first_1;
@@ -66,23 +63,9 @@ void print_binary(int n)
 
 int main()
 {
-    print_binary(11);
-    print_binary(193691);
-    print_binary(12397195);
-    print_binary(397691);
-    print_binary(1);
-    print_binary(699723465);
-    print_binary(98696699);
-    print_binary(46);
-    /* printf("%d\n", extract_tag(10)); */
-    /* printf("%d\n", extract_tag(6429)); */
-    /* printf("%d\n", extract_tag(99649)); */
-    /* printf("%d\n", extract_ptr(8660)); */
-    /* printf("%d\n", extract_ptr(83660)); */
-    /* printf("%d\n", extract_ptr(847756)); */
-    /* printf("%d\n", set_tag(8663, 2)); */
-    /* printf("%d\n", set_tag(8662, 3)); */
-    /* printf("%d\n", set_tag(78462, 1)); */
-    /* printf("%d\n", set_tag(8669232, 0)); */
+    int answer;
+
+    answer = set_bits(58827, 9, 4, 581);
+    print_binary(answer);
     return 0;
 }
