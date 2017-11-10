@@ -30,7 +30,7 @@ unsigned getbits(unsigned x, int p, int n)
 unsigned set_bits(unsigned x, int p, int n, unsigned y)
 {
     y = getbits(y, (n - 1), n);
-    x = (LOW_BITS | HIGH_BITS) | (y << (p - (n - 1)));
+    x = (LOW_BITS | HIGH_BITS) | (y << p);
     return x;
 }
 
