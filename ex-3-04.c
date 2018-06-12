@@ -9,13 +9,17 @@ void reverse(char s[]);
 void itoa(int n, char s[])
 {
     int i, sign;
+    unsigned int negated;
 
-    if ((sign = n) < 0) /* record sign */
-        n = -n;
+    if ((sign = n) < 0) {
+        negated = -(unsigned int)n;
+    } else {
+        negated = n;
+    }
     i = 0;
     do { /* generate digits in reverse order */
-        s[i++] = n % 10 + '0'; /* get next digit */
-    } while ((n /= 10)); /*delete it */
+        s[i++] = negated % 10 + '0'; /* get next digit */
+    } while ((negated /= 10)); /*delete it */
     if (sign < 0)
         s[i++] = '-';
     s[i] = '\0';
@@ -37,5 +41,8 @@ int main()
 {
     char s[100];
 
-    printf("the output is: %s", itoa(50, s));
+    itoa(-2147483648, s);
+
+    printf("the output is: %s\n", s);
 }
+
